@@ -13,8 +13,8 @@ def main():
     physical = PhysicalLayer()
     physical.startServer()
 
-    datalink = DataLinkLayer(macAddress="00:1B:44:11:3A:B7")
-    network = NetworkLayer(ipAddress="192.168.1.1")
+    datalink = DataLinkLayer()
+    network = NetworkLayer()
     transport = TransportLayer()
     session = SessionLayer()
     presentation = PresentationLayer()

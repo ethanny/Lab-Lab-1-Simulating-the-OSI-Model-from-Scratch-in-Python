@@ -1,9 +1,21 @@
 import json
+import socket
 
 class NetworkLayer:
-    def __init__(self, ipAddress):
+    def __init__(self):
         # Initialize the NetworkLayer with an IP address
-        self.ipAddress = ipAddress
+        self.ipAddress = self.get_local_ip()
+
+    def get_local_ip(self):
+        """Retrieve the local network IP address."""
+        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        try:
+            # Connect to an external server (Google DNS) but don't actually send data
+            s.connect(("8.8.8.8", 80))
+            ip_address = s.getsockname()[0]
+        finally:
+            s.close()
+        return ip_address
 
     def send(self, data):
         # Create a JSON packet with the IP address and the data

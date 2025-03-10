@@ -1,10 +1,12 @@
 import json
+import re
+import uuid   
 
 class DataLinkLayer:
-    def __init__(self, macAddress):
+    def __init__(self):
         # Initialize the DataLinkLayer with a MAC address
-        self.macAddress = macAddress
-
+        self.macAddress = ':'.join(re.findall('..', '%012x' % uuid.getnode()))
+    
     def send(self, data):
         # Create a JSON frame with the MAC address and the data
         frame = json.dumps({"macAddress": self.macAddress, "data": data})
